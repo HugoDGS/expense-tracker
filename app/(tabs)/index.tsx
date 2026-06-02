@@ -9,13 +9,13 @@ import ExpenseItem from '../../components/ExpenseItem';
 
 export default function HomeScreen() {
   const router = useRouter();
-  const { expenses, total, month, remove } = useExpenses();
+  const { expenses, total, month, remove, refresh } = useExpenses();
   const [totalBudget, setTotalBudget] = useState(0);
 
   useEffect(() => {
     const budgets = getBudgets();
     setTotalBudget(Object.values(budgets).reduce((s, v) => s + v, 0));
-  }, []);
+  }, [expenses]);
 
   const handleEdit = (expense: Expense) => {
     router.push({ pathname: '/add', params: { id: String(expense.id) } });
